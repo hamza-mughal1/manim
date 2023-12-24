@@ -1,0 +1,9 @@
+# This file is used internally by FFMPEG.
+file 'file:C:/Users/Hamza/Documents/manim/media/videos/derivative/1080p60/partial_movie_files/Function/462517863_2029495969_223132457.mp4'
+file 'file:C:/Users/Hamza/Documents/manim/media/videos/derivative/1080p60/partial_movie_files/Function/1776149149_2241803674_3316784545.mp4'
+file 'file:C:/Users/Hamza/Documents/manim/media/videos/derivative/1080p60/partial_movie_files/Function/1776149149_4170352225_942356998.mp4'
+file 'file:C:/Users/Hamza/Documents/manim/media/videos/derivative/1080p60/partial_movie_files/Function/1776149149_1551341508_1084161644.mp4'
+file 'file:C:/Users/Hamza/Documents/manim/media/videos/derivative/1080p60/partial_movie_files/Function/1776149149_1132282288_2164845316.mp4'
+file 'file:C:/Users/Hamza/Documents/manim/media/videos/derivative/1080p60/partial_movie_files/Function/1776149149_953612219_942356998.mp4'
+file 'file:C:/Users/Hamza/Documents/manim/media/videos/derivative/1080p60/partial_movie_files/Function/1776149149_2725678883_1084161644.mp4'
+file 'file:C:/Users/Hamza/Documents/manim/media/videos/derivative/1080p60/partial_movie_files/Function/1776149149_3687956762_1924002279.mp4'

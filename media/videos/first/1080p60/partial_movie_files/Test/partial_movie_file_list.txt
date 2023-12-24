@@ -1,0 +1,12 @@
+# This file is used internally by FFMPEG.
+file 'file:C:/Users/Hamza/Documents/manim/media/videos/first/1080p60/partial_movie_files/Test/3977891868_4185481072_223132457.mp4'
+file 'file:C:/Users/Hamza/Documents/manim/media/videos/first/1080p60/partial_movie_files/Test/2852726489_2478614912_1931372359.mp4'
+file 'file:C:/Users/Hamza/Documents/manim/media/videos/first/1080p60/partial_movie_files/Test/2852726489_3367481799_223132457.mp4'
+file 'file:C:/Users/Hamza/Documents/manim/media/videos/first/1080p60/partial_movie_files/Test/2852726489_2296301025_2786358654.mp4'
+file 'file:C:/Users/Hamza/Documents/manim/media/videos/first/1080p60/partial_movie_files/Test/2852726489_2290909463_2786358654.mp4'
+file 'file:C:/Users/Hamza/Documents/manim/media/videos/first/1080p60/partial_movie_files/Test/2852726489_2999915123_2786358654.mp4'
+file 'file:C:/Users/Hamza/Documents/manim/media/videos/first/1080p60/partial_movie_files/Test/2852726489_3895304724_2786358654.mp4'
+file 'file:C:/Users/Hamza/Documents/manim/media/videos/first/1080p60/partial_movie_files/Test/2852726489_3968674824_2786358654.mp4'
+file 'file:C:/Users/Hamza/Documents/manim/media/videos/first/1080p60/partial_movie_files/Test/2852726489_3448265216_2786358654.mp4'
+file 'file:C:/Users/Hamza/Documents/manim/media/videos/first/1080p60/partial_movie_files/Test/2852726489_553774292_223132457.mp4'
+file 'file:C:/Users/Hamza/Documents/manim/media/videos/first/1080p60/partial_movie_files/Test/2852726489_2439916692_1226959656.mp4'
