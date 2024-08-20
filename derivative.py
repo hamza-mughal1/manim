@@ -1,5 +1,45 @@
 from manim import *
 
+# *ORANGE* ~YELLOW~ !BLUE! |RED| ;GREEN; :n
+        
+# example: Here we have a ~Function~ .
+
+def create_text(text : str, text_font_size = 50, text_font = "Times New Roman"):
+    objs = []
+
+    for i in text.split(" "):
+        if i.startswith("*") and i.endswith("*"):
+            objs.append(Text(i[1:-1],font_size=text_font_size, font=text_font, color=ORANGE))
+
+        elif i.startswith("~") and i.endswith("~"):
+            objs.append(Text(i[1:-1],font_size = text_font_size, font = text_font, color = YELLOW))
+
+        elif i.startswith("!") and i.endswith("!"):
+            objs.append(Text(i[1:-1],font_size = text_font_size, font = text_font, color = BLUE))
+
+        elif i.startswith("|") and i.endswith("|"):
+            objs.append(Text(i[1:-1],font_size = text_font_size, font = text_font, color = RED))
+
+        elif i.startswith(";") and i.endswith(";"):
+            objs.append(Text(i[1:-1],font_size = text_font_size, font = text_font, color = GREEN))
+
+        elif i == ":n":
+            objs.append("new_line")
+
+        else:
+            objs.append(Text(i,font_size = text_font_size, font = text_font))
+
+    groups = []
+    group = []
+
+    for pos,i in enumerate(objs):
+        if ((i == "new_line") and (len(group) > 0)) or (len(objs)-1 == pos):
+            groups.append(VGroup(*group).arrange(RIGHT, aligned_edge = DOWN))
+            group.clear()
+        else:
+            group.append(i)
+
+    return VGroup(*groups).arrange(DOWN, aligned_edge = LEFT)
 
 class Intro1(Scene):
     def construct(self):
@@ -481,3 +521,370 @@ class Function6(Scene):
         self.wait(3)
 
         self.play(FadeOut(text1))
+
+class Dimension(Scene):
+    def construct(self):
+        font_of_text = "Times New Roman"
+        heading_font_size = 70
+        normal_font_size = 50
+
+
+        """heading 1"""
+        text1 = create_text("Let's talk about ;'dimensions'; . ", text_font_size=heading_font_size)
+        self.play(Write(text1))
+        self.wait()
+        self.play(text1.animate.shift(UP))
+        self.wait()
+        self.play(FadeOut(text1))
+
+        """normal text"""
+        text2 = create_text("what are ;'dimensions'; ? ")
+        self.play(Write(text2))
+        self.wait()
+        self.play(text2.animate.shift(UP*3))
+        self.wait(2)
+
+        """definition"""
+        text3 = create_text("Think of ;'dimensions'; as !'directions'! :n now it will be easy to understand . ")
+        self.play(Write(text3), run_time = 5)
+        self.play(text3.animate.shift(UP))
+        self.wait(3)
+        self.play(FadeOut(text2), text3.animate.shift(UP*2), run_time = 2)
+
+        """explaination"""
+        text4 = create_text("Let's say we have a *line* here: ")
+
+
+        """number line"""
+        line = NumberLine(x_range = [-5,5], color = ORANGE).shift(DOWN*4)
+        self.play(Write(text4),Write(line), run_time = 3)
+        self.wait(3)
+        self.play(FadeOut(text3), text4.animate.shift(UP*3))
+        self.wait(2)
+
+        """stickman introduction"""
+        text5 = create_text("On this line our friend !Mark! lives . ")
+        self.play(Write(text5), FadeOut(text4))
+        self.play(text5.animate.shift(UP*2))
+
+        """stickman figure"""
+        mark = create_text(" !Mark! ").shift(RIGHT).shift(DOWN).scale(0.7)
+        stickman = ImageMobject("C:/Users/Hamza/Documents/derivatives/stickman.png").move_to(line.get_center()).shift(UP).scale(0.5)
+
+        """arrow of name to stickman"""
+        arrow1 = Arrow(start=mark.get_bottom(), end=stickman.get_top(), buff=0.1)
+        self.play(FadeIn(stickman))
+        self.play(Write(mark), Create(arrow1))
+        self.wait(2)
+        self.play(FadeOut(mark), FadeOut(arrow1),
+                  FadeOut(text5))
+
+        """normal text"""
+        text6 = create_text("our guy can move ~left~ and ~right~ ")
+        left = create_text(" ~LEFT~ ").move_to(line.get_left()).shift(UP/2).scale(0.5)
+        right = create_text(" ~RIGHT~ ").move_to(line.get_right()).shift(UP/2).scale(0.5)
+        
+        left_direct = create_text(";<; ").move_to(stickman.get_left()).shift(LEFT/2).scale(0.7)
+        right_direct = create_text(";>; ").move_to(stickman.get_right()).shift(RIGHT/2).scale(0.7)
+
+        self.play(Write(text6), Write(left), Write(right),
+                  Write(left_direct), Write(right_direct), run_time = 2)
+
+
+        self.play(stickman.animate.shift(LEFT*3), left_direct.animate.shift(LEFT*3),
+                  right_direct.animate.shift(LEFT*3), run_time = 1.5)
+        
+        self.play(stickman.animate.shift(RIGHT*6), left_direct.animate.shift(RIGHT*6),
+                  right_direct.animate.shift(RIGHT*6), run_time = 2)
+        
+        self.play(stickman.animate.shift(LEFT*3), left_direct.animate.shift(LEFT*3),
+                  right_direct.animate.shift(LEFT*3), run_time = 1.5)
+        
+        text7 = create_text("Now you guys might say if this guy :n can move in two ;directions; that means :n he lives in 2 |dimensional| space . ").shift(UP*2)
+        self.play(FadeOut(text6), run_time = 1)
+        self.play(Write(text7), run_time = 4)
+        self.wait(3)
+
+        text8 = create_text("But definition of ;dimension; is bit :n different from what I have told you . ").shift(UP*2)
+        self.play(FadeOut(text7), run_time = 1)
+        self.play(Write(text8), run_time = 3)
+        self.wait(3)
+
+        text9 = create_text("Which means the numbers of extra ;directions; :n an ~object~ has freedom to move in , is his :n |dimension| . ").shift(UP*2)
+        self.play(FadeOut(text8), run_time = 1)
+        self.play(Write(text9, run_time = 3))
+        self.wait(3)
+
+        text10 = create_text("Sounds bit ~silly~ and |confusing| . ;Right; ? ").shift(UP*2)
+        self.play(FadeOut(text9), run_time = 1)
+        self.play(Write(text10, run_time = 3))
+        self.wait(3)
+
+        text11 = create_text("It means even if the guy is moving :n !left! or *right* he is on the same *line* :n he was before . ").shift(UP*2)
+        self.play(FadeOut(text10), run_time = 1)
+        self.play(Write(text11, run_time = 3))
+        
+        self.play(stickman.animate.shift(LEFT*3), left_direct.animate.shift(LEFT*3),
+                  right_direct.animate.shift(LEFT*3), run_time = 1)
+        
+        self.play(stickman.animate.shift(RIGHT*6), left_direct.animate.shift(RIGHT*6),
+                  right_direct.animate.shift(RIGHT*6), run_time = 1.5)
+        
+        self.play(stickman.animate.shift(LEFT*3), left_direct.animate.shift(LEFT*3),
+                  right_direct.animate.shift(LEFT*3), run_time = 1)
+        
+
+        text12 = create_text("He is just moving in |opposite| ;direction; not :n in some extra ;direction; . ").shift(UP*2)
+        self.play(FadeOut(text11), run_time = 1)
+        self.play(Write(text12, run_time = 3))
+        self.wait(3)
+
+        text13 = create_text("If we look , !left! is just |opposite| :n of *right* ( not some extra ;direction; ) . ").shift(UP*2)
+        self.play(FadeOut(text12), run_time = 1)
+        self.play(Write(text13, run_time = 3))
+        self.wait(3)
+
+        self.play(FadeOut(text13), FadeOut(stickman), FadeOut(line),
+                  FadeOut(left_direct), FadeOut(right_direct))
+
+class Dimension2(Scene):
+    def construct(self):
+        text1 = create_text("Don't worry if you don't ;understand; . :n We will look it in ~detail~ . ")
+        self.play(Write(text1), run_time = 3)
+        self.wait(2)
+        self.play(text1.animate.shift(UP*2), run_time = 2)
+        self.wait(1)
+        self.play(FadeOut(text1), run_time = 1)
+
+        text2 = create_text("Let's imagine we have this !dot! here: ").shift(UP*3)
+        self.play(Write(text2))
+        
+        dot = Dot().shift(DOWN*3).scale(2)
+
+        self.play(Create(dot))
+        self.wait(2)
+
+        """stickman introduction"""
+        text3 = create_text("On this dot our friend !Mark! lives . ").shift(UP*2)
+        self.play(FadeOut(text2))
+        self.play(Write(text3))
+        self.play(text3.animate.shift(UP*1))
+
+        """stickman figure"""
+        mark = create_text(" !Mark! ").shift(RIGHT).scale(0.7)
+        stickman = ImageMobject("C:/Users/Hamza/Documents/derivatives/stickman.png").move_to(dot.get_center()).shift(UP).scale(0.4)
+
+        """arrow of name to stickman"""
+        arrow1 = Arrow(start=mark.get_bottom(), end=stickman.get_top(), buff=0.1)
+        self.play(FadeIn(stickman))
+        self.play(Write(mark), Create(arrow1))
+        self.wait(2)
+       
+        text4 = create_text("As we can see our !guy! has no ~room~ to move . :n means he has no ;direction; to move . ").shift(UP*2)
+        self.play(FadeOut(text3))
+        self.play(Write(text4), run_time = 3)
+        self.play(text4.animate.shift(UP*1))
+
+        self.wait(3)
+
+        text5 = create_text("means he is in |0| ;dimensional; space . ").shift(UP*2)
+        self.play(FadeOut(text4))
+        self.play(Write(text5), run_time = 3)
+        self.play(text5.animate.shift(UP*1))
+        
+
+        self.wait(3)
+
+        self.play(FadeOut(dot), FadeOut(stickman), FadeOut(mark), FadeOut(arrow1),
+                  FadeOut(text5), run_time = 3)
+
+class Dimension3(Scene):
+    def construct(self):
+        text1 = create_text("Now let's stack two 1 ;dimensional; *line* :n which we discussed before . ")
+        line1 = NumberLine(x_range = [-5,5], color = ORANGE).shift(DOWN*4)
+        line2 = NumberLine(x_range = [-5,5], color = ORANGE).shift(DOWN*3).shift(DOWN/2)
+
+        self.play(Write(text1), run_time = 3)
+        self.wait(2)
+        self.play(text1.animate.shift(UP*3))
+        self.play(Create(line1), Create(line2), run_time = 2)
+        self.wait(3)
+
+        text2 = create_text("Of course on these *lines* our guy !mark! lives ~;)~ ").shift(UP*3)
+        self.play(FadeOut(text1), run_time = 1)
+        self.play(Write(text2), run_time = 2)
+
+        mark = create_text(" !Mark! ").shift(RIGHT).scale(0.7)
+        stickman = ImageMobject("C:/Users/Hamza/Documents/derivatives/stickman.png").move_to(line2.get_center()).shift(UP).scale(0.5)
+        arrow1 = Arrow(start=mark.get_bottom(), end=stickman.get_top(), buff=0.1)
+        self.play(FadeIn(stickman))
+        self.play(Write(mark), Create(arrow1))
+
+        self.wait(3)
+
+        text3 = create_text("As we already know he can move !left! and ;right; . ").shift(UP*3)
+        self.play(FadeOut(text2), run_time = 1)
+        self.play(Write(text3), run_time = 2)
+
+        left_direct = create_text(";<; ").move_to(stickman.get_left()).shift(LEFT/2).scale(0.7)
+        right_direct = create_text(";>; ").move_to(stickman.get_right()).shift(RIGHT/2).scale(0.7)
+
+        self.play(Write(left_direct), Write(right_direct), FadeOut(mark), FadeOut(arrow1))
+        self.wait(1.5)
+
+        self.play(stickman.animate.shift(LEFT*3), left_direct.animate.shift(LEFT*3),
+                  right_direct.animate.shift(LEFT*3), run_time = 1.5)
+        
+        self.play(stickman.animate.shift(RIGHT*6), left_direct.animate.shift(RIGHT*6),
+                  right_direct.animate.shift(RIGHT*6), run_time = 2)
+        
+        self.play(stickman.animate.shift(LEFT*3), left_direct.animate.shift(LEFT*3),
+                  right_direct.animate.shift(LEFT*3), run_time = 1.5)
+
+
+        text4 = create_text("But something new here is that he :n can now jump between both *lines* . ").shift(UP*3)
+        self.play(FadeOut(text3), run_time = 1)
+        self.play(Write(text4), run_time = 2)
+        self.play(Unwrite(left_direct), Unwrite(right_direct), run_time = 1)
+        
+        self.play(stickman.animate.shift(DOWN/2))
+        self.wait(1)
+        self.play(stickman.animate.shift(UP/2))
+
+        self.play(ApplyWave(text4))
+        self.wait(2)
+
+
+        text5 = create_text("Now this extra *line* allows our !guy! :n to move in extra ;directions; !UP! and ~DOWN~ .").shift(UP*3)
+        self.play(FadeOut(text4), run_time = 1)
+        self.play(Write(text5), run_time = 2)
+        self.wait(1)
+        self.play(stickman.animate.shift(DOWN/2))
+        self.play(stickman.animate.shift(UP/2))
+
+        self.wait(3)
+
+        text6 = create_text("Let's make it more clear by adding more *lines* . ").shift(UP*3)
+        self.play(FadeOut(text5), run_time = 1)
+        self.play(Write(text6), run_time = 2)
+        self.wait(2)
+
+        self.play(FadeOut(stickman))
+
+        line3 = NumberLine(x_range = [-5,5], color = ORANGE).shift(DOWN*3)
+        line4 = NumberLine(x_range = [-5,5], color = ORANGE).shift(DOWN*2).shift(DOWN/2)
+        line5 = NumberLine(x_range = [-5,5], color = ORANGE).shift(DOWN*2)
+
+        self.play(Create(line3), Create(line4), Create(line5), run_time = 3 )
+
+        stickman = stickman.shift(UP*1.5)
+
+        self.play(FadeIn(stickman))
+
+        text7 = create_text("Our !guy! can move on these *lines* as before :n just number of *lines* got increased . ").shift(UP*3)
+        self.play(FadeOut(text6), run_time = 1)
+        self.play(Write(text7), run_time = 2)
+        self.wait(2)
+
+        self.wait(1)
+
+        self.play(stickman.animate.shift(LEFT*3), left_direct.animate.shift(LEFT*3),
+                  right_direct.animate.shift(LEFT*3), run_time = 1.5)
+        
+        self.play(stickman.animate.shift(RIGHT*6), left_direct.animate.shift(RIGHT*6),
+                  right_direct.animate.shift(RIGHT*6), run_time = 2)
+        
+        self.play(stickman.animate.shift(LEFT*3), left_direct.animate.shift(LEFT*3),
+                  right_direct.animate.shift(LEFT*3), run_time = 1.5)
+
+        self.wait(1)
+
+        self.play(stickman.animate.shift(DOWN/2),run_time = 0.5)
+        self.play(stickman.animate.shift(DOWN/2),run_time = 0.5)
+        self.play(stickman.animate.shift(DOWN/2),run_time = 0.5)
+        self.play(stickman.animate.shift(DOWN/2),run_time = 0.5)
+        self.play(stickman.animate.shift(UP/2),run_time = 0.5)
+        self.play(stickman.animate.shift(UP/2),run_time = 0.5)
+        self.play(stickman.animate.shift(UP/2),run_time = 0.5)
+        self.play(stickman.animate.shift(UP/2),run_time = 0.5)
+
+        self.wait(2)
+
+        text8 = create_text("As we can see these *lines* contains some :n ~points~ on which our !guy! can move on. ").shift(UP*3)
+        self.play(FadeOut(text7), run_time = 1)
+        self.play(Write(text8), run_time = 2)
+
+        self.wait(1)
+
+        arrow_for_line = Arrow(end = line5.get_center(), buff=0.3).shift(LEFT)
+        arrow_for_line2 = Arrow(end = line5.get_center(), buff=0.3).shift(LEFT*2)
+        arrow_for_line3 = Arrow(end = line5.get_center(), buff=0.3).shift(LEFT*3)
+        self.play(Create(arrow_for_line), Create(arrow_for_line2), Create(arrow_for_line3))
+        self.wait(3)
+
+        self.play(FadeOut(arrow_for_line),FadeOut(arrow_for_line2),FadeOut(arrow_for_line3),run_time = 1)
+
+        self.play(stickman.animate.shift(LEFT), run_time = 0.5)   
+        self.play(stickman.animate.shift(LEFT), run_time = 0.5)   
+        self.play(stickman.animate.shift(LEFT), run_time = 0.5)   
+        self.play(stickman.animate.shift(LEFT), run_time = 0.5)   
+        self.play(stickman.animate.shift(RIGHT), run_time = 0.5)   
+        self.play(stickman.animate.shift(RIGHT), run_time = 0.5)   
+        self.play(stickman.animate.shift(RIGHT), run_time = 0.5)   
+        self.play(stickman.animate.shift(RIGHT), run_time = 0.5)   
+    
+        self.wait(2)
+
+        text9 = create_text("Now let's increase the ~points~ on a *line* which :n allows our !guy! to move more specific on a *line* . ").shift(UP*3)
+        self.play(FadeOut(text8), run_time = 1)
+        self.play(Write(text9), run_time = 2)
+
+
+        line6 = NumberLine(x_range = [-50,50], unit_size= 0.1, color = ORANGE).shift(DOWN*4)
+        line7 = NumberLine(x_range = [-50,50], unit_size= 0.1, color = ORANGE).shift(DOWN*3).shift(DOWN/2)
+        line8 = NumberLine(x_range = [-50,50], unit_size= 0.1, color = ORANGE).shift(DOWN*3)
+        line9 = NumberLine(x_range = [-50,50], unit_size= 0.1, color = ORANGE).shift(DOWN*2).shift(DOWN/2)
+        line10 = NumberLine(x_range = [-50,50], unit_size= 0.1, color = ORANGE).shift(DOWN*2)
+
+
+
+        self.play(Transform(line1, line6), Transform(line2, line7), Transform(line3, line8),
+                  Transform(line4, line9), Transform(line5, line10), run_time = 2)
+        
+        self.wait(2)
+
+        text10 = create_text("The distance between two ~points~ is unit size . ").shift(UP*3)
+        self.play(FadeOut(text9), run_time = 1)
+        self.play(Write(text10), run_time = 2)
+
+        self.wait(2)
+
+        text11 = create_text("Now let's increase the number of ~points~ on a line :n so |rapidly| that total number :n of points get's near to :n *infinity* but not quite *infinity* . In other :n words let's make unit size equal to ~plank lenght~ !( 1.616x10^-35 m)! . ").shift(UP*3)
+        self.play(FadeOut(text10), run_time = 1)
+        self.play(Write(text11), run_time = 4)
+
+        self.wait(2)
+
+        self.play(ApplyWave(text11))
+
+        self.wait(2)
+
+        line6 = NumberLine(x_range = [-500,500], unit_size= 0.01, color = ORANGE).shift(DOWN*4)
+        line7 = NumberLine(x_range = [-500,500], unit_size= 0.01, color = ORANGE).shift(DOWN*3).shift(DOWN/2)
+        line8 = NumberLine(x_range = [-500,500], unit_size= 0.01, color = ORANGE).shift(DOWN*3)
+        line9 = NumberLine(x_range = [-500,500], unit_size= 0.01, color = ORANGE).shift(DOWN*2).shift(DOWN/2)
+        line10 = NumberLine(x_range = [-500,500], unit_size= 0.01, color = ORANGE).shift(DOWN*2)
+
+
+
+        self.play(Transform(line1, line6), Transform(line2, line7), Transform(line3, line8),
+                  Transform(line4, line9), Transform(line5, line10), run_time = 2)
+
+        self.wait(3)
+
+class Test(Scene):
+    def construct(self):
+        text11 = create_text("Now let's increase the number of ~points~ on a line :n so |rapidly| that total number points get's near to of *infinity* but not quite :n *infinity* . In other words let's make unit size equal :n to ~plank lenght~ !( 1.616x10^-35 m)! . ").shift(UP*2)
+        self.play(Write(text11), run_time = 4)
+
+
